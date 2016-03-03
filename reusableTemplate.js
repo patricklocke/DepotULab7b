@@ -7,17 +7,41 @@ var library = (function(){
 
 		// Collections --- Complete Functions Below
 		each : function(list, iterator) {
-            for(i =0; i < list.length; i++){
-                iterator(list[i],i,list);
-            }
             
+            for(var i =0; i < list.length; i++){
+                iterator(list[i],i,list);
+            };
+            
+    
+        },
+		filter : function(list, test) {
+            var result = [];
+            for(var i = 0; i < list.length; i++){
+                if (test(list[i])) {
+                    result.push(list[i]);
+                }
+            }
+            return result;
         },
 
-		filter : function(list, test) {},
+		reject : function(list, test) {
+            var result = [];
+            for(var i = 0; i < list.length; i++){
+                if (!test(list[i]))  {
+                   result.push(list[i]);
+                }
+            }
+            return result;
+        },
 
-		reject : function(list, test) {},
-
-		map : function(list, iterator) {},
+		map : function(list, iterator) {
+            var result = []
+            for(var i =0; i < list.length; i++){
+                result.push(iterator(list[i],i,list));
+            };
+            return result;
+        },
+            
 
 		pluck : function(list, key) {
 			return this.map(list, function(item){
